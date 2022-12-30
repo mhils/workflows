@@ -1,6 +1,8 @@
 on:
   workflow_call:
     inputs:
+      environment:
+        type: string
       artifact:
         required: true
         type: string
@@ -13,6 +15,7 @@ on:
 
 jobs:
   deploy:
+    environment: ${{ inputs.environment || 'deploy' }}
     env:
       TWINE_USERNAME: ${{ secrets.username || '__token__' }}
       TWINE_PASSWORD: ${{ secrets.password }}
