@@ -1,0 +1,29 @@
+on:
+  workflow_call:
+    inputs:
+      artifact:
+        required: true
+        type: string
+      repository:
+        type: string
+    secrets:
+      username:
+      password:
+        required: true
+
+jobs:
+  deploy:
+    env:
+      TWINE_USERNAME: ${{ secrets.username || '__token__' }}
+      TWINE_PASSWORD: ${{ secrets.password }}
+      TWINE_REPOSITORY: ${{ inputs.repository || 'pypi' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y twine
+      - uses: actions/download-artifact@v3
+        with:
+          name: ${{ inputs.artifact }}
+          path: dist/
+      - run: twine check dist/*
+      - run: twine upload dist/*
