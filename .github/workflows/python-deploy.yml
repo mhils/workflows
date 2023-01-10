@@ -4,7 +4,6 @@ on:
       environment:
         type: string
       artifact:
-        required: true
         type: string
       repository:
         type: string
@@ -26,7 +25,7 @@ jobs:
       - run: sudo apt-get install -y twine
       - uses: actions/download-artifact@v3
         with:
-          name: ${{ inputs.artifact }}
+          name: ${{ inputs.artifact || 'wheels' }}
           path: dist/
       - run: twine check dist/*
       - run: twine upload dist/*
