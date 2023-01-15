@@ -11,6 +11,9 @@
 #   with:
 #     jobs: ${{ toJSON(needs) }}
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:

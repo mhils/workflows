@@ -5,6 +5,9 @@
 #   with:
 #     python-version: "3.11"
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:
@@ -24,6 +27,8 @@ jobs:
     runs-on: ${{ inputs.os || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ inputs.python-version || (inputs.python-version-file == '' && hashFiles('.github/python-version.txt') == '' && hashFiles('.python-version') == '' && '3.11') || '' }}

@@ -7,6 +7,9 @@
 #   secrets:
 #     password: ${{ secrets.PYPI_TOKEN }}
 
+permissions:
+  contents: read
+
 on:
   workflow_call:
     inputs:
