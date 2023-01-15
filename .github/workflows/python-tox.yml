@@ -1,25 +1,23 @@
-env: 
-  help: |
-    Usage:
-    
-    test:
-      strategy:
-        matrix:
-          include:
-            - os: windows-latest
-              py: "3.11"
-            - os: macos-latest
-              py: "3.11"
-            - os: ubuntu-latest
-              py: "3.11"
-            - os: ubuntu-latest
-              py: "3.10"
-            - os: ubuntu-latest
-              py: "3.9"
-      uses: mhils/workflows/.github/workflows/python-tox.yml@main
-      with:
-        os: ${{ matrix.os }}
-        python-version: ${{ matrix.py }}
+# Usage:
+#
+# test:
+#   strategy:
+#     matrix:
+#       include:
+#         - os: windows-latest
+#           py: "3.11"
+#         - os: macos-latest
+#           py: "3.11"
+#         - os: ubuntu-latest
+#           py: "3.11"
+#         - os: ubuntu-latest
+#           py: "3.10"
+#         - os: ubuntu-latest
+#           py: "3.9"
+#   uses: mhils/workflows/.github/workflows/python-tox.yml@main
+#   with:
+#     os: ${{ matrix.os }}
+#     python-version: ${{ matrix.py }}
 
 on:
   workflow_call:
@@ -45,4 +43,4 @@ jobs:
       - name: Install tox from PyPI
         uses: install-pinned/tox@860f16fa13d5806c16252fde07a79d6f2a7b9f8f  # 4.2.8
         
-      - run: tox -e py -- ${{ matrix.args }}
+      - run: tox -e py -- ${{ inputs.args }}

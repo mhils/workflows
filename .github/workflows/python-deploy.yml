@@ -1,13 +1,11 @@
-env: 
-  help: |
-    Usage:
-    
-    deploy:
-      uses: mhils/workflows/.github/workflows/python-deploy.yml@main
-      needs: check
-      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
-      secrets:
-        password: ${{ secrets.PYPI_TOKEN }}
+# Usage:
+#
+# deploy:
+#   uses: mhils/workflows/.github/workflows/python-deploy.yml@main
+#   needs: check
+#   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+#   secrets:
+#     password: ${{ secrets.PYPI_TOKEN }}
 
 on:
   workflow_call:
