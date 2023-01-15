@@ -1,10 +1,11 @@
-env: help: |
-  Usage:
+env: 
+  help: |
+    Usage:
 
-  build:
-    uses: mhils/workflows/.github/workflows/python-build.yml@main
-    with:
-      python-version: "3.11"
+    build:
+      uses: mhils/workflows/.github/workflows/python-build.yml@main
+      with:
+        python-version: "3.11"
 
 on:
   workflow_call:
