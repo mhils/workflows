@@ -32,7 +32,7 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ inputs.python-version || (inputs.python-version-file == '' && hashFiles('.github/python-version.txt') == '' && hashFiles('.python-version') == '' && '3.11') || '' }}
-          python-version-file: ${{ inputs.python-version-file || (hashFiles('.github/python-version.txt') != '' && '.github/python-version.txt') || '' }}
+          python-version-file: ${{ inputs.python-version-file || (inputs.python-version == '' && hashFiles('.github/python-version.txt') != '' && '.github/python-version.txt') || '' }}
       
       # potentially add https://youtu.be/n39uvwdW5ek?t=579 here.
       

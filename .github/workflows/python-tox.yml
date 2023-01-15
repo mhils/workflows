@@ -35,6 +35,9 @@ on:
         type: string
       python-version-file:
         type: string
+      post-action:
+        type: string
+        default: 'mhils/workflows/.github/actions/noop@main'
 
 jobs:
   tox:
@@ -46,9 +49,11 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ inputs.python-version || (inputs.python-version-file == '' && hashFiles('.github/python-version.txt') == '' && hashFiles('.python-version') == '' && '3.11') || '' }}
-          python-version-file: ${{ inputs.python-version-file || (hashFiles('.github/python-version.txt') != '' && '.github/python-version.txt') || '' }}
+          python-version-file: ${{ inputs.python-version-file || (inputs.python-version == '' && hashFiles('.github/python-version.txt') != '' && '.github/python-version.txt') || '' }}
 
       - name: Install tox from PyPI
         uses: install-pinned/tox@89d9b16820f54cf5f35b58733d4636d7175bbf45  # 4.2.8
         
       - run: ${{ inputs.cmd }}
+
+      - uses: ${{ inputs.post-action }}
