@@ -35,9 +35,6 @@ on:
         type: string
       python-version-file:
         type: string
-      post-action:
-        type: string
-        default: 'mhils/workflows/.github/actions/noop@main'
 
 jobs:
   tox:
@@ -53,7 +50,5 @@ jobs:
 
       - name: Install tox from PyPI
         uses: install-pinned/tox@89d9b16820f54cf5f35b58733d4636d7175bbf45  # 4.2.8
-        
-      - run: ${{ inputs.cmd }}
 
-      - uses: ${{ inputs.post-action }}
+      - run: ${{ inputs.cmd }}
