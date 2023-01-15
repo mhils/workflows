@@ -8,18 +8,20 @@
 on:
   workflow_call:
     inputs:
-      artifact:
-        type: string
-      build-args:
+      os:
         type: string
       python-version:
         type: string
       python-version-file:
         type: string
+      build-args:
+        type: string
+      artifact:
+        type: string
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ inputs.os || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
