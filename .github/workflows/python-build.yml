@@ -1,0 +1,29 @@
+on:
+  workflow_call:
+    inputs:
+      artifact:
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      
+      # potentially add https://youtu.be/n39uvwdW5ek?t=579 here.
+      
+      # install all build dependencies
+      - name: Install build from PyPI
+        uses: install-pinned/build@80d41abb0995d6d957a562f30fc70c39fca61b6f  # 0.9.0
+      - name: Install setuptools from PyPI
+        uses: install-pinned/setuptools@0d74f5e9d09987231503f9b1c8e6c918e1c45fb8  # 65.6.3
+      - name: Install wheel from PyPI
+        uses: install-pinned/wheel@53c86096b91671b8bb138a78a963c1e88295a5a3  # 0.38.4
+        
+      # build wheel without network connection.
+      - run: sudo unshare --net -- $(which python) -m build --no-isolation
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.artifact || 'wheels' }}
+          path: dist/
