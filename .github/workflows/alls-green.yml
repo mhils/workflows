@@ -1,3 +1,17 @@
+env: help: |
+  A simple wrapper around re-actors/alls-green so that we only need to pin in one place.
+
+  Usage:
+
+  check:
+    if: always()
+    needs:
+    - test
+    - build
+    uses: mhils/workflows/.github/workflows/alls-green.yml@main
+    with:
+      jobs: ${{ toJSON(needs) }}
+
 on:
   workflow_call:
     inputs:
