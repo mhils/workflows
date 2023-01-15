@@ -29,6 +29,8 @@ on:
         type: string
       python-version-file:
         type: string
+      args:
+        type: string
 
 jobs:
   test:
