@@ -3,6 +3,8 @@ on:
     inputs:
       artifact:
         type: string
+      build-args:
+        type: string
 
 jobs:
   build:
@@ -22,7 +24,7 @@ jobs:
         uses: install-pinned/wheel@53c86096b91671b8bb138a78a963c1e88295a5a3  # 0.38.4
         
       # build wheel without network connection.
-      - run: sudo unshare --net -- $(which python) -m build --no-isolation
+      - run: sudo unshare --net -- $(which python) -m build --no-isolation ${{ inputs.build-args }}
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ inputs.artifact || 'wheels' }}
