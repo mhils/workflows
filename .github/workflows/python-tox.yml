@@ -1,14 +1,25 @@
 on:
   workflow_call:
+    inputs:
+      os:
+        type: string
+        required: true
+      python-version:
+        type: string
+      python-version-file:
+        type: string
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ inputs.os }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.py }}
+          python-version: ${{ inputs.python-version }}
+          python-version-file: ${{ inputs.python-version-file }}
+
       - name: Install tox from PyPI
         uses: install-pinned/tox@860f16fa13d5806c16252fde07a79d6f2a7b9f8f  # 4.2.8
+        
       - run: tox -e py -- ${{ matrix.args }}

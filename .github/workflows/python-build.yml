@@ -5,6 +5,10 @@ on:
         type: string
       build-args:
         type: string
+      python-version:
+        type: string
+      python-version-file:
+        type: string
 
 jobs:
   build:
@@ -12,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ inputs.python-version }}
+          python-version-file: ${{ inputs.python-version-file }}
       
       # potentially add https://youtu.be/n39uvwdW5ek?t=579 here.
       
