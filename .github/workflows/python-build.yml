@@ -39,8 +39,12 @@ jobs:
       - name: Install wheel from PyPI
         uses: install-pinned/wheel@53c86096b91671b8bb138a78a963c1e88295a5a3  # 0.38.4
         
-      # build wheel without network connection.
-      - run: sudo unshare --net -- $(which python3) -m build --no-isolation ${{ inputs.build-args }}
+      # build wheel without network connection where possible
+      - if: runner.os == 'Linux'
+        run: sudo unshare --net -- $(which python3) -m build --no-isolation ${{ inputs.build-args }}
+      - if: runner.os != 'Linux'
+        run: python3 -m build --no-isolation ${{ inputs.build-args }}
+      
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ inputs.artifact || 'wheels' }}
