@@ -34,7 +34,7 @@ on:
         type: string
 
 jobs:
-  test:
+  tox:
     runs-on: ${{ inputs.os || 'ubuntu-latest' }}
     steps:
       - uses: actions/checkout@v3
