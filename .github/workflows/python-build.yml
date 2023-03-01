@@ -40,7 +40,7 @@ jobs:
       - name: Install build from PyPI
         uses: install-pinned/build@cf4a01f09945135c4749f1d9ceddcb356550cba8  # 0.10.0
       - name: Install setuptools from PyPI
-        uses: install-pinned/setuptools@450f4af8ab94dddc2fa05fd6a689ac0d5a830a00  # 67.3.2
+        uses: install-pinned/setuptools@55335464e21207922f8e7a51eadd1baba2fefcf2  # 67.3.2
       - name: Install wheel from PyPI
         uses: install-pinned/wheel@dc4c85bb0929b68433024036227938f8cb4d5f9c  # 0.38.4
         
