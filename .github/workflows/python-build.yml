@@ -42,7 +42,7 @@ jobs:
       - name: Install setuptools from PyPI
         uses: install-pinned/setuptools@9b8691156c55df0fd6850417c11dbe0addbad203  # 67.3.2
       - name: Install wheel from PyPI
-        uses: install-pinned/wheel@dfd9a05d07cb7ae303ed7cbcdeaa30f3fd44b658  # 0.38.4
+        uses: install-pinned/wheel@bef0f25d353f388434010690edbc75ec156e6031  # 0.38.4
         
       # build wheel without network connection where possible
       - if: runner.os == 'Linux'
