@@ -38,7 +38,7 @@ jobs:
       
       # install all build dependencies
       - name: Install build from PyPI
-        uses: install-pinned/build@d33ceb50a5d964ebcf7f89dddd26ef826debce39  # 0.10.0
+        uses: install-pinned/build@102a24e5449f519f1d6eb6869bb6fe9f19bd495e  # 0.10.0
       - name: Install setuptools from PyPI
         uses: install-pinned/setuptools@0edc9af85b1355186c46f11a82e233317440cfec  # 67.3.2
       - name: Install wheel from PyPI
