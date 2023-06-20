@@ -9,17 +9,6 @@ permissions:
   
 on:
   workflow_call:
-    inputs:
-      os:
-        type: string
-      python-version:
-        type: string
-      python-version-file:
-        type: string
-      build-args:
-        type: string
-      artifact:
-        type: string
 
 jobs:
   # Build the documentation and upload the static HTML files as an artifact.
@@ -41,7 +30,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v1
         with:
-          path: docs/
+          path: public/
 
   # Deploy the artifact to GitHub pages.
   # This is a separate job so that only actions/deploy-pages has the necessary permissions.
