@@ -1,0 +1,59 @@
+# Usage:
+#
+# build:
+#   uses: mhils/workflows/.github/workflows/gh-pages-hugo.yml@main
+
+# security: restrict permissions for CI jobs.
+permissions:
+  contents: read
+  
+on:
+  workflow_call:
+    inputs:
+      os:
+        type: string
+      python-version:
+        type: string
+      python-version-file:
+        type: string
+      build-args:
+        type: string
+      artifact:
+        type: string
+
+jobs:
+  # Build the documentation and upload the static HTML files as an artifact.
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          
+      # potentially add https://youtu.be/n39uvwdW5ek?t=579 here.
+      
+      - run: |
+          wget -q https://github.com/gohugoio/hugo/releases/download/v0.114.0/hugo_extended_0.114.0_linux-amd64.deb
+          echo "bee0eb0309fc6e86958c422072606dbf30199ba3d8188b37725553629f7e90d4 hugo_extended_0.114.0_linux-amd64.deb" | sha256sum -c
+          sudo dpkg -i hugo*.deb
+          
+      - run: hugo
+
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs/
+
+  # Deploy the artifact to GitHub pages.
+  # This is a separate job so that only actions/deploy-pages has the necessary permissions.
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v2
