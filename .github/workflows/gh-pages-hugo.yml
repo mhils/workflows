@@ -9,6 +9,12 @@ permissions:
   
 on:
   workflow_call:
+    inputs:
+      deploy:
+        description: 'True if the website should be built and deployed, false if it should be built only.'
+        default: true
+        required: false
+        type: boolean
 
 jobs:
   # Build the documentation and upload the static HTML files as an artifact.
@@ -35,6 +41,7 @@ jobs:
   # Deploy the artifact to GitHub pages.
   # This is a separate job so that only actions/deploy-pages has the necessary permissions.
   deploy:
+    if: ${{ inputs.deploy }}
     needs: build
     runs-on: ubuntu-latest
     permissions:
