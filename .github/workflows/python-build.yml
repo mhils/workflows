@@ -21,6 +21,9 @@ on:
         type: string
       artifact:
         type: string
+      build-backend:
+        type: string
+        default: 'setuptools'
 
 jobs:
   build:
@@ -39,11 +42,16 @@ jobs:
       # install all build dependencies
       - name: Install build from PyPI
         uses: install-pinned/build@11bbf2deeb1a44228c45910f3b57e346927960b4  # 0.10.0
-      - name: Install setuptools from PyPI
-        uses: install-pinned/setuptools@faab8e3664bc14679352c4c87a27e298d8c8ce5c  # 67.3.2
       - name: Install wheel from PyPI
         uses: install-pinned/wheel@bef0f25d353f388434010690edbc75ec156e6031  # 0.38.4
-        
+
+      - name: Install setuptools from PyPI
+        if: inputs.build-backend == 'setuptools'
+        uses: install-pinned/setuptools@faab8e3664bc14679352c4c87a27e298d8c8ce5c  # 67.3.2
+      - name: Install pdm-backend from PyPI
+        if: inputs.build-backend == 'pdm-backend'
+        uses: install-pinned/pdm-backend@74732366c54354b809a255179cb5626c1d9be436  # 2.1.7
+
       # build wheel without network connection where possible
       - if: runner.os == 'Linux'
         run: sudo unshare --net -- $(which python3) -m build --no-isolation ${{ inputs.build-args }}
