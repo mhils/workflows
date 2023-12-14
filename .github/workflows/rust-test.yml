@@ -1,0 +1,43 @@
+# Usage:
+#
+# test:
+#   strategy:
+#     matrix:
+#       include:
+#         - os: windows-latest
+#         - os: macos-latest
+#         - os: ubuntu-latest
+#           rust: "1.71"
+#   uses: mhils/workflows/.github/workflows/rust-test.yml@main
+#   with:
+#     os: ${{ matrix.os }}
+#     rust: ${{ matrix.rust }}
+
+permissions:
+    contents: read
+  
+on:
+  workflow_call:
+    inputs:
+      os:
+        type: string
+        required: false
+        default: ubuntu-latest
+      rust:
+        type: string
+        required: false
+
+jobs:
+  tox:
+    runs-on: ${{ inputs.os }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - name: Set up Rust toolchain
+      if: inputs.rust
+      run: rustup toolchain install ${{ inputs.rust }} --profile minimal
+    - uses: Swatinem/rust-cache@3cf7f8cc28d1b4e7d01e3783be10a97d55d483c8  # v2.7.1
+      timeout-minutes: 2
+      continue-on-error: true
+    - run: cargo test --workspace --all-features
