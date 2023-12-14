@@ -28,7 +28,7 @@ on:
         required: false
 
 jobs:
-  tox:
+  test:
     runs-on: ${{ inputs.os }}
     steps:
     - uses: actions/checkout@v4
