@@ -35,7 +35,7 @@ jobs:
     steps:
       - run: sudo apt-get update
       - run: sudo apt-get install -y twine
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: ${{ inputs.artifact || 'wheels' }}
           path: dist/

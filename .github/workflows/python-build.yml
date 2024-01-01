@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ inputs.python-version || (inputs.python-version-file == '' && hashFiles('.github/python-version.txt') == '' && hashFiles('.python-version') == '' && '3.11') || '' }}
           python-version-file: ${{ inputs.python-version-file || (inputs.python-version == '' && hashFiles('.github/python-version.txt') != '' && '.github/python-version.txt') || '' }}
@@ -45,16 +45,16 @@ jobs:
       
       # install all build dependencies
       - name: Install build from PyPI
-        uses: install-pinned/build@11bbf2deeb1a44228c45910f3b57e346927960b4  # 0.10.0
+        uses: install-pinned/build@6921a57b43fbb0fd3bcc42465ec9b4f3630e0032  # 0.10.0
       - name: Install wheel from PyPI
-        uses: install-pinned/wheel@bef0f25d353f388434010690edbc75ec156e6031  # 0.38.4
+        uses: install-pinned/wheel@69fcd3bf9122632692bd1bdd302a4814524b23f6  # 0.38.4
 
       - name: Install setuptools from PyPI
         if: inputs.build-backend == 'setuptools'
-        uses: install-pinned/setuptools@faab8e3664bc14679352c4c87a27e298d8c8ce5c  # 67.3.2
+        uses: install-pinned/setuptools@93b4b13a0d475203a73b5618734728c538cbf936  # 67.3.2
       - name: Install pdm-backend from PyPI
         if: inputs.build-backend == 'pdm-backend'
-        uses: install-pinned/pdm-backend@74732366c54354b809a255179cb5626c1d9be436  # 2.1.7
+        uses: install-pinned/pdm-backend@11a9ffaf7783ab0279788096a12dc0ceb0e23842  # 2.1.7
 
       # build wheel without network connection where possible
       - if: (runner.os == 'Linux' && inputs.build-offline)
@@ -62,7 +62,7 @@ jobs:
       - if: (runner.os == 'Linux' && inputs.build-offline) == false
         run: python3 -m build --no-isolation ${{ inputs.build-args }}
       
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.artifact || 'wheels' }}
           path: dist/

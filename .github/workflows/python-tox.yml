@@ -43,12 +43,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ inputs.python-version || (inputs.python-version-file == '' && hashFiles('.github/python-version.txt') == '' && hashFiles('.python-version') == '' && '3.11') || '' }}
           python-version-file: ${{ inputs.python-version-file || (inputs.python-version == '' && hashFiles('.github/python-version.txt') != '' && '.github/python-version.txt') || '' }}
 
       - name: Install tox from PyPI
-        uses: install-pinned/tox@d721b02b670f5997d4542e0b658ff7c1d0f3d186  # 4.4.5
+        uses: install-pinned/tox@f30881462c1548e0b438f2fad2098fbd45ea86d9  # 4.4.5
 
       - run: ${{ inputs.cmd }}
