@@ -51,7 +51,7 @@ jobs:
 
       - name: Install setuptools from PyPI
         if: inputs.build-backend == 'setuptools'
-        uses: install-pinned/setuptools@3f365f8db446d403dd56d4a7c626b9fc0123002b  # 67.3.2
+        uses: install-pinned/setuptools@a0910ee31d9e06f0fa80b24812762f0a47cd4f5f  # 67.3.2
       - name: Install pdm-backend from PyPI
         if: inputs.build-backend == 'pdm-backend'
         uses: install-pinned/pdm-backend@11a9ffaf7783ab0279788096a12dc0ceb0e23842  # 2.1.7
