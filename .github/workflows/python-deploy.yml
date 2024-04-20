@@ -15,8 +15,12 @@ on:
     inputs:
       environment:
         type: string
-      artifact:
+      artifact-name:
         type: string
+      artifact-pattern:
+        type: string
+      artifact-merge-multiple:
+        type: boolean
       repository:
         type: string
     secrets:
@@ -33,11 +37,13 @@ jobs:
       TWINE_REPOSITORY: ${{ inputs.repository || 'pypi' }}
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt-get update
-      - run: sudo apt-get install -y twine
+      - name: Install twine from PyPI
+        uses: install-pinned/twine@27ea8a4ac601d8478b4e041ad09b3a2127b2ea62  # 5.0.0
       - uses: actions/download-artifact@v4
         with:
-          name: ${{ inputs.artifact || 'wheels' }}
+          name: ${{ inputs.artifact-name }}
+          pattern: ${{ inputs.artifact-pattern }}
+          merge-multiple: ${{ inputs.artifact-merge-multiple }}
           path: dist/
       - run: twine check dist/*
       - run: twine upload dist/*
