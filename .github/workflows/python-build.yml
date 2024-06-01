@@ -45,16 +45,16 @@ jobs:
       
       # install all build dependencies
       - name: Install build from PyPI
-        uses: install-pinned/build@567700fee69e19868f2fb97f273638b2e9edd730  # 0.10.0
+        uses: install-pinned/build@0308e579e8aad0c0efc2da421dd2a682abdaf3db  # 0.10.0
       - name: Install wheel from PyPI
         uses: install-pinned/wheel@c19e97434788e900da7700acb54aaf6be4cda440  # 0.38.4
 
       - name: Install setuptools from PyPI
         if: inputs.build-backend == 'setuptools'
-        uses: install-pinned/setuptools@a34d7908c170e2e0927b8b9cca56ef78d82c656d  # 67.3.2
+        uses: install-pinned/setuptools@600f0bdaba9d54972d025f8e264568691f8ed608  # 67.3.2
       - name: Install pdm-backend from PyPI
         if: inputs.build-backend == 'pdm-backend'
-        uses: install-pinned/pdm-backend@61495dc845257cd8d9e284de793b6b08267afce9  # 2.1.7
+        uses: install-pinned/pdm-backend@08ab6c03d7caff940eddf331b8771707545d050f  # 2.1.7
 
       # build wheel without network connection where possible
       - if: (runner.os == 'Linux' && inputs.build-offline)
