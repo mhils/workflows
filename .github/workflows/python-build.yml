@@ -4,9 +4,15 @@
 #   uses: mhils/workflows/.github/workflows/python-build.yml@main
 #   with:
 #     python-version: "3.11"
+#   permissions:
+#     contents: read
+#     id-token: write
+#     attestations: write
 
 permissions:
   contents: read
+  id-token: write
+  attestations: write
 
 on:
   workflow_call:
@@ -61,6 +67,10 @@ jobs:
         run: sudo unshare --net -- $(which python3) -m build --no-isolation ${{ inputs.build-args }}
       - if: (runner.os == 'Linux' && inputs.build-offline) == false
         run: python3 -m build --no-isolation ${{ inputs.build-args }}
+
+      - uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: 'dist/*'
       
       - uses: actions/upload-artifact@v4
         with:
