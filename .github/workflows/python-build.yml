@@ -33,6 +33,9 @@ on:
       build-offline:
         type: boolean
         default: true
+      attest-provenance:
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -68,7 +71,8 @@ jobs:
       - if: (runner.os == 'Linux' && inputs.build-offline) == false
         run: python3 -m build --no-isolation ${{ inputs.build-args }}
 
-      - uses: actions/attest-build-provenance@v1
+      - if: inputs.attest-provenance
+        uses: actions/attest-build-provenance@v1
         with:
           subject-path: 'dist/*'
       
