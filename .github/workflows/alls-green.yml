@@ -19,8 +19,26 @@ on:
     inputs:
       jobs:
         type: string
-        description: The jobs that need to pass.
+        description: >-
+          A list of jobs from the `needs` context, serialized as a JSON
+          string via `toJSON(needs)`
         required: true
+      allowed-failures:
+        type: string
+        default: >-
+          []
+        description: >-
+          Job names that are allowed to fail and not affect the outcome,
+          as a comma-separated list or serialized as a JSON string
+        required: false
+      allowed-skips:
+        type: string
+        default: >-
+          []
+        description: >-
+          Job names that are allowed to be skipped and not affect the
+          outcome, as a comma-separated list or serialized as a JSON string
+        required: false
 
 jobs:
   check:
@@ -30,3 +48,5 @@ jobs:
     - uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe  # v1.2.2
       with:
         jobs: ${{ inputs.jobs }}
+        allowed-failures: ${{ inputs.allowed-failures }}
+        allowed-skips: ${{ inputs.allowed-skips }}
