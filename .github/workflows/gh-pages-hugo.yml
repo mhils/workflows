@@ -1,7 +1,13 @@
 # Usage:
 #
-# build:
-#   uses: mhils/workflows/.github/workflows/gh-pages-hugo.yml@main
+#  build:
+#    uses: mhils/workflows/.github/workflows/gh-pages-hugo.yml@main
+#    with:
+#      deploy: ${{ github.ref == 'refs/heads/main' }}
+#    permissions:
+#      contents: read
+#      id-token: write
+#      pages: write
 
 # security: restrict permissions for CI jobs.
 permissions:
