@@ -21,6 +21,11 @@ on:
         default: true
         required: false
         type: boolean
+      working-directory:
+        description: 'The hugo base directory.'
+        default: "."
+        required: false
+        type: string
 
 jobs:
   # Build the documentation and upload the static HTML files as an artifact.
@@ -39,10 +44,11 @@ jobs:
           sudo dpkg -i hugo*.deb
           
       - run: hugo
+        working-directory: ${{ inputs.working-directory }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: public/
+          path: ${{ inputs.working-directory }}/public/
 
   # Deploy the artifact to GitHub pages.
   # This is a separate job so that only actions/deploy-pages has the necessary permissions.
