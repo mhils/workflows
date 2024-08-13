@@ -68,13 +68,26 @@ jobs:
         run: sudo unshare --net -- $(which python3) -m build --no-isolation ${{ inputs.build-args }}
       - if: (runner.os == 'Linux' && inputs.build-offline) == false
         run: python3 -m build --no-isolation ${{ inputs.build-args }}
-
-      - if: inputs.attest-provenance && github.event_name != 'pull_request'
-        uses: actions/attest-build-provenance@v1
-        with:
-          subject-path: 'dist/*'
       
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ inputs.artifact || 'wheels' }}
           path: dist/
+
+  attest:
+    needs: build
+    if: inputs.attest-provenance && github.event_name != 'pull_request'
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact || 'wheels' }}
+          path: dist/
+      - uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: 'dist/*'
+    
