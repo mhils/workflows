@@ -3,7 +3,7 @@
 # build:
 #   uses: mhils/workflows/.github/workflows/python-build.yml@main
 #   with:
-#     python-version: "3.12"
+#     python-version: "3.13"
 #   permissions:
 #     contents: read
 
@@ -39,7 +39,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ inputs.python-version || (inputs.python-version-file == '' && hashFiles('.github/python-version.txt') == '' && hashFiles('.python-version') == '' && '3.11') || '' }}
+          python-version: ${{ inputs.python-version || (inputs.python-version-file == '' && hashFiles('.github/python-version.txt') == '' && hashFiles('.python-version') == '' && '3.13') || '' }}
           python-version-file: ${{ inputs.python-version-file || (inputs.python-version == '' && hashFiles('.github/python-version.txt') != '' && '.github/python-version.txt') || '' }}
       
       - uses: ./.github/actions/pre-build
