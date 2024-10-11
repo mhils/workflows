@@ -1,2 +1,2 @@
 # workflows
-Reusable GitHub Actions Workflows
+Reusable GitHub Actions and Workflows
