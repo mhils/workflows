@@ -1,0 +1,9 @@
+name: 'astral-sh/setup-uv'
+description: 'astral-sh/setup-uv with better defaults'
+runs:
+  using: "composite"
+  steps:
+    - uses: astral-sh/setup-uv@77c28f02b3322332d4a4446b3177f426da8bf086
+      with:
+        version: "0.4.20"
+        enable-cache: true
