@@ -47,13 +47,13 @@ jobs:
       
       # install all build dependencies
       - name: Install build from PyPI
-        uses: install-pinned/build@fd74312bf8fa4a8e5db75511358065e3d99b17b0  # 0.10.0
+        uses: install-pinned/build@4a00f0c34793eaed8ab450ae66113382fbc86a52  # 0.10.0
       - name: Install wheel from PyPI
         uses: install-pinned/wheel@c926bd4c553fa4bf7d957d60abf42b3104129128  # 0.38.4
 
       - name: Install setuptools from PyPI
         if: inputs.build-backend == 'setuptools'
-        uses: install-pinned/setuptools@6fda8144545eb2182571385fdd29de126105da4a  # 67.3.2
+        uses: install-pinned/setuptools@c80120ae1a6d43b1ee21b196978194ac7f2bdfb3  # 67.3.2
       - name: Install pdm-backend from PyPI
         if: inputs.build-backend == 'pdm-backend'
         uses: install-pinned/pdm-backend@3078edff141fe014366e464ee464e422e55fb7ca  # 2.1.7
