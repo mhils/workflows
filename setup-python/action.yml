@@ -1,4 +1,4 @@
-name: 'actions/setup-python && astral-sh/setup-uv'
+name: 'actions/setup-python'
 description: 'actions/setup-python with better defaults'
 inputs:
   python-version:
