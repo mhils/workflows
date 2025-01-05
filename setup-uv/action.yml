@@ -6,4 +6,4 @@ runs:
     - uses: astral-sh/setup-uv@77c28f02b3322332d4a4446b3177f426da8bf086
       with:
         version: "0.4.20"
-        enable-cache: true
+        enable-cache: ${{ !startsWith(github.ref, 'refs/tags/') }}  # harden against cache poisoning
