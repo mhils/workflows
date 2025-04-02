@@ -1,7 +1,12 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
-    directory: "/"
+    directories: 
+     - /
+     - checkout/
+     - rust-cache/
+     - setup-python/
+     - setup-uv/
     schedule:
       interval: "monthly"
     groups:
