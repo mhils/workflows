@@ -1,7 +1,13 @@
 name: 'Swatinem/rust-cache'
 description: 'Swatinem/rust-cache with better defaults'
+inputs:
+  key:
+    description: "Swatinem/rust-cache: key"
+    required: false
 runs:
   using: "composite"
   steps:
     - uses: Swatinem/rust-cache@9d47c6ad4b02e050fd481d890b2ea34778fd09d6  # v2.7.8
       if: ${{ !startsWith(github.ref, 'refs/tags/') }}  # harden against cache poisoning
+      with:
+        key: ${{ inputs.key }}
