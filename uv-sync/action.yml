@@ -8,5 +8,9 @@ runs:
   steps:
     - run: uv sync --frozen ${{ inputs.args }}
       shell: bash
-    - run: echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
+    - if: runner.os == 'Windows'
+      run: echo "$PWD/.venv/Scripts" >> "$GITHUB_PATH"
+      shell: bash
+    - if: runner.os != 'Windows'
+      run: echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
       shell: bash
