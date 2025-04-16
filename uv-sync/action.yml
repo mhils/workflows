@@ -9,8 +9,10 @@ runs:
     - run: uv sync --frozen ${{ inputs.args }}
       shell: bash
     - if: runner.os == 'Windows'
-      run: echo "$PWD/.venv/Scripts" >> "$GITHUB_PATH"
+      run: echo "$GITHUB_WORKSPACE/.venv/Scripts" >> "$GITHUB_PATH"
       shell: bash
     - if: runner.os != 'Windows'
-      run: echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
+      run: echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
       shell: bash
+    - if runer.os == 'Windows'
+      uses: mxschmitt/action-tmate@v3
