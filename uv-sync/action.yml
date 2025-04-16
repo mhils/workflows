@@ -1,0 +1,10 @@
+name: 'uv sync'
+description: 'create a venv and add it to $PATH'
+inputs:
+  args:
+    description: "extra arguments for `uv sync`"
+runs:
+  using: "composite"
+  steps:
+    - run: uv sync --frozen ${{ inputs.args }}
+    - run: echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
