@@ -7,4 +7,6 @@ runs:
   using: "composite"
   steps:
     - run: uv sync --frozen ${{ inputs.args }}
+      shell: bash
     - run: echo "$PWD/.venv/bin" >> "$GITHUB_PATH"
+      shell: bash
