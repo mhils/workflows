@@ -3,7 +3,7 @@ description: 'astral-sh/setup-uv with better defaults'
 runs:
   using: "composite"
   steps:
-    - uses: astral-sh/setup-uv@d44461ea9f6b6d77b25a3b196dc2cdb60b5d29eb
+    - uses: astral-sh/setup-uv@1bf14936647e2742afe170d7d7fd95f45bfe4fc7
       with:
         version: "0.7.5"
         enable-cache: ${{ !startsWith(github.ref, 'refs/tags/') }}  # harden against cache poisoning
