@@ -8,7 +8,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
+    - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405
       with:
         python-version: ${{ inputs.python-version || (inputs.python-version-file == '' && hashFiles('.github/python-version.txt') == '' && hashFiles('.python-version') == '' && '3.13') || '' }}
         python-version-file: ${{ inputs.python-version-file || (inputs.python-version == '' && hashFiles('.github/python-version.txt') != '' && '.github/python-version.txt') || '' }}
