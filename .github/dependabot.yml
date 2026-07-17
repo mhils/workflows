@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: github-actions
-    directories: 
+    directories:
      - /
      - checkout/
      - rust-cache/
@@ -9,6 +9,8 @@ updates:
      - setup-uv/
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 42
     groups:
       dependencies:
         patterns:

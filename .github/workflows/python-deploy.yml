@@ -39,7 +39,7 @@ jobs:
     steps:
       - name: Install twine from PyPI
         uses: install-pinned/twine@c51f8a0aac17f0d63786bdda69ce488cd68b3572  # 5.0.0
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: ${{ inputs.artifact-name }}
           pattern: ${{ inputs.artifact-pattern }}
