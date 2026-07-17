@@ -34,7 +34,7 @@ jobs:
   build:
     runs-on: ${{ inputs.os || 'ubuntu-latest' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: actions/setup-python@v6
@@ -64,7 +64,7 @@ jobs:
       - if: (runner.os == 'Linux' && inputs.build-offline) == false
         run: python3 -m build --no-isolation ${{ inputs.build-args }}
       
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: ${{ inputs.artifact || 'wheels' }}
           path: dist/
