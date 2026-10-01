@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install twine from PyPI
-        uses: install-pinned/twine@c51f8a0aac17f0d63786bdda69ce488cd68b3572  # 5.0.0
+        uses: install-pinned/twine@debc1db2ff6d1503a644839d7b439a745364ca47  # 5.0.0
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: ${{ inputs.artifact-name }}
