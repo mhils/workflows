@@ -51,6 +51,6 @@ jobs:
           python-version-file: ${{ inputs.python-version-file || (inputs.python-version == '' && hashFiles('.github/python-version.txt') != '' && '.github/python-version.txt') || '' }}
 
       - name: Install tox from PyPI
-        uses: install-pinned/tox@f190bca130d747c3ebfbc045954d5681934342fc  # 4.4.5
+        uses: install-pinned/tox@5c049b8156d6af271714a6191ef6f08bc9b7e6ed  # 4.4.5
 
       - run: ${{ inputs.cmd }}
